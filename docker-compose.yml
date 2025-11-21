@@ -5,14 +5,15 @@ services:
     build: .
     ports:
       - "4000:4000"
-    env_file: .env
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
     environment:
-      DATABASE_URL: "postgresql://postgres:postgres@db:5432/brandie"
+      DATABASE_URL: "postgresql://postgres:postgres@db:5432/brandie?schema=public"
       REDIS_URL: "redis://redis:6379"
     command: sh -c "pnpm prisma migrate deploy && node dist/index.js"
 
@@ -34,3 +35,8 @@ services:
     image: redis:7
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 5s
+      retries: 5

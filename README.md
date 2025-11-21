@@ -480,7 +480,7 @@ Add Comment
 
 ```graphql
 mutation {
-  AddComment(postId: "post-id", text: "Great post!") {
+  AddComment(postId: "post-id", text: "Nice work!") {
     comment {
       id
       text
@@ -643,26 +643,42 @@ pnpm prisma generate          # Generate Prisma Client
 pnpm test                     # Run all tests
 pnpm test --watch             # Run tests in watch mode
 pnpm test --coverage          # Run with coverage report
+
+# Docker
+docker compose up -d          # Start all services (local dev)
+docker compose down           # Stop all services
+docker compose logs -f api    # View API logs
 ```
 
 ---
 
-## Contributing
+## Deployment
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+**Production API**: https://brandie.mayank.engineer/graphql
+
+Deploy directly on your server using Docker:
+
+```bash
+# Clone the repository on your server
+git clone <repository-url>
+cd brandie_backend
+
+# Create .env file with your configuration
+cp .env.example .env
+nano .env
+
+# Start services with Docker Compose
+docker compose up -d --build
+
+# View logs
+docker compose logs -f api
+
+# Stop services
+docker compose down
+```
 
 ---
 
 ## License
 
 This project is licensed under the ISC License.
-
----
-
-## Contact
-
-For questions or support, please open an issue on the repository.
