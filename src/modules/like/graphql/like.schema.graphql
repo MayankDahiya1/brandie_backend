@@ -1,0 +1,22 @@
+# TYPE
+type LikeResponse {
+  message: String!
+  status: String!
+}
+
+# MUTATION
+extend type Mutation {
+  LikePost(postId: ID!): LikeResponse!
+    @auth
+    @rateLimit(limit: 100, duration: 60)
+  UnlikePost(postId: ID!): LikeResponse!
+    @auth
+    @rateLimit(limit: 100, duration: 60)
+}
+
+# QUERY
+extend type Query {
+  GetPostLikes(postId: ID!): [User!]! @rateLimit(limit: 100, duration: 60)
+  GetPostLikeCount(postId: ID!): Int! @rateLimit(limit: 200, duration: 60)
+  HasLiked(postId: ID!): Boolean! @auth @rateLimit(limit: 200, duration: 60)
+}

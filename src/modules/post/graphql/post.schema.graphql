@@ -1,0 +1,30 @@
+# Type
+type Post {
+  id: String!
+  author: User!
+  text: String!
+  mediaUrl: String!
+  createdAt: String!
+}
+
+type PostResponse {
+  post: Post!
+  message: String!
+  status: String!
+}
+
+# Mutation
+extend type Mutation {
+  CreatePost(text: String!, mediaUrl: String!): PostResponse!
+    @auth
+    @rateLimit(limit: 10, duration: 60)
+}
+
+# Query
+extend type Query {
+  MyPosts(limit: Int = 20, offset: Int = 0): [Post!]!
+    @auth
+    @rateLimit(limit: 100, duration: 60)
+  UserPosts(userId: String!, limit: Int = 20, offset: Int = 0): [Post!]!
+    @rateLimit(limit: 100, duration: 60)
+}

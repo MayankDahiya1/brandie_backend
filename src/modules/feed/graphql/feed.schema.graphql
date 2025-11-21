@@ -1,0 +1,20 @@
+# Type
+type FeedPost {
+  id: String!
+  text: String!
+  mediaUrl: String!
+  author: User!
+  createdAt: String!
+}
+
+type PaginatedFeed {
+  edges: [FeedPost!]!
+  nextCursor: String
+}
+
+# Query
+extend type Query {
+  GetHomeFeed(cursor: String, limit: Int = 10): PaginatedFeed!
+    @auth
+    @rateLimit(limit: 60, duration: 60)
+}

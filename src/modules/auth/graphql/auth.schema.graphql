@@ -1,0 +1,49 @@
+# ENUM
+enum Role {
+  NORMAL
+  ADMIN
+}
+
+# TYPES SCHEMAS
+type User {
+  id: String!
+  email: String!
+  role: Role!
+  name: String
+  createdAt: String!
+}
+
+type AuthPayload {
+  user: User!
+  accessToken: String!
+  refreshToken: String!
+  message: String!
+  status: String!
+}
+
+type AuthTokens {
+  accessToken: String!
+  message: String!
+  status: String!
+}
+
+type LogoutUser {
+  message: String!
+  status: String!
+}
+
+# QUERY
+type Query {
+  _empty: String
+}
+
+# MUTATION
+type Mutation {
+  SignUpUser(email: String!, password: String!, name: String): AuthPayload!
+    @rateLimit(limit: 5, duration: 60)
+  LoginUser(email: String!, password: String!): AuthPayload!
+    @rateLimit(limit: 10, duration: 60)
+  LogoutUser(token: String!): LogoutUser! @rateLimit(limit: 20, duration: 60)
+  RefreshToken(userId: String!, token: String!): AuthTokens!
+    @rateLimit(limit: 30, duration: 60)
+}

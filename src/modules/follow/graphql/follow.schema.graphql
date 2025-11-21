@@ -1,0 +1,24 @@
+# Follow Response Type
+type FollowResponse {
+  message: String!
+  status: String!
+}
+
+# Mutation
+extend type Mutation {
+  FollowUser(userId: String!): FollowResponse!
+    @auth
+    @rateLimit(limit: 50, duration: 60)
+  UnfollowUser(userId: String!): FollowResponse!
+    @auth
+    @rateLimit(limit: 50, duration: 60)
+}
+
+# Query
+extend type Query {
+  Followers(userId: String!): [User!]! @rateLimit(limit: 100, duration: 60)
+  Following(userId: String!): [User!]! @rateLimit(limit: 100, duration: 60)
+  IsFollowing(userId: String!): Boolean!
+    @auth
+    @rateLimit(limit: 200, duration: 60)
+}

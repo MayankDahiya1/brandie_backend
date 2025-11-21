@@ -1,0 +1,34 @@
+# TYPE
+type CommentPayload {
+  message: String!
+  status: String!
+}
+
+type Comment {
+  id: ID!
+  text: String!
+  createdAt: String!
+  user: User!
+}
+
+type CommentConnection {
+  edges: [Comment!]!
+  nextCursor: String
+}
+
+# MUTATION
+extend type Mutation {
+  AddComment(postId: ID!, text: String!): CommentPayload!
+    @auth
+    @rateLimit(limit: 30, duration: 60)
+  DeleteComment(commentId: ID!): CommentPayload!
+    @auth
+    @rateLimit(limit: 50, duration: 60)
+}
+
+# QUERY
+extend type Query {
+  GetComments(postId: ID!, cursor: String, limit: Int = 20): CommentConnection!
+    @rateLimit(limit: 100, duration: 60)
+  GetCommentCount(postId: ID!): Int! @rateLimit(limit: 200, duration: 60)
+}
