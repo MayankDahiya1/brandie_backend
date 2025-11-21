@@ -15,9 +15,11 @@ COPY . .
 RUN pnpm prisma generate
 RUN pnpm build
 
-# Copy GraphQL and generated schemas
-RUN cp -r src/generated dist/ || true
-RUN cp -r src/modules dist/modules || true
+# Copy generated Prisma client
+RUN cp -r src/generated dist/
+
+# Copy GraphQL schema files
+RUN find src/modules -name "*.graphql" -exec sh -c 'mkdir -p "dist/$(dirname "$1" | sed "s|^src/||")" && cp "$1" "dist/$(echo "$1" | sed "s|^src/||")"' _ {} \;
 
 EXPOSE 4000
 
