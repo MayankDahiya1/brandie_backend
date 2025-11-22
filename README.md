@@ -338,6 +338,8 @@ mutation {
 
 Create Post
 
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
+
 ```graphql
 mutation {
   CreatePost(
@@ -362,6 +364,8 @@ mutation {
 ```
 
 Get My Posts
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 query {
@@ -394,6 +398,8 @@ query {
 
 Follow User
 
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
+
 ```graphql
 mutation {
   FollowUser(userId: "user-id-to-follow") {
@@ -404,6 +410,8 @@ mutation {
 ```
 
 Unfollow User
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 mutation {
@@ -428,6 +436,8 @@ query {
 
 Check if Following
 
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
+
 ```graphql
 query {
   IsFollowing(userId: "user-id")
@@ -437,6 +447,8 @@ query {
 ### Likes
 
 Like Post
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 mutation {
@@ -448,6 +460,8 @@ mutation {
 ```
 
 Unlike Post
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 mutation {
@@ -468,6 +482,8 @@ query {
 
 Check if User Liked
 
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
+
 ```graphql
 query {
   HasLiked(postId: "post-id")
@@ -477,6 +493,8 @@ query {
 ### Comments
 
 Add Comment
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 mutation {
@@ -515,6 +533,8 @@ query {
 
 Delete Comment
 
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
+
 ```graphql
 mutation {
   DeleteComment(commentId: "comment-id") {
@@ -527,6 +547,8 @@ mutation {
 ### Home Feed
 
 Get Home Feed
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 query {
@@ -548,6 +570,8 @@ query {
 ```
 
 Paginated Feed
+
+**Requires Authentication:** `Authorization: Bearer ${accessToken}`
 
 ```graphql
 query {
