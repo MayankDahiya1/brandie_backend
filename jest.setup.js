@@ -4,5 +4,5 @@ const dotenvPath = path.resolve(__dirname, ".env");
 
 require("dotenv").config({ path: dotenvPath });
 
-console.log("✅ Jest loaded .env file");
+console.log("Jest loaded .env file");
 console.log("DATABASE_URL:", process.env.DATABASE_URL);

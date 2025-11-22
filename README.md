@@ -8,7 +8,7 @@ Simple, practical, and built to behave like a real appointment service.
 ## Quick Facts
 
 - **Node.js + TypeScript** – Type-safe backend
-- **Apollo GraphQL** – Flexible API with schema directives
+- **Apollo GraphQL** – API with schema directives
 - **Prisma (Postgres)** – Type-safe ORM with migrations
 - **Redis** – Distributed locks & caching utilities
 - **Pino logger** – Fast structured logging
@@ -342,10 +342,7 @@ Create Post
 
 ```graphql
 mutation {
-  CreatePost(
-    text: "Hello World! 🌍"
-    mediaUrl: "https://example.com/image.jpg"
-  ) {
+  CreatePost(text: "My first post", mediaUrl: "https://example.com/image.jpg") {
     post {
       id
       text
@@ -498,7 +495,7 @@ Add Comment
 
 ```graphql
 mutation {
-  AddComment(postId: "post-id", text: "Nice work!") {
+  AddComment(postId: "post-id", text: "Interesting post") {
     comment {
       id
       text
@@ -680,14 +677,14 @@ docker compose logs -f api    # View API logs
 
 **Production API**: https://brandie.mayank.engineer/graphql
 
-Deploy directly on your server using Docker:
+Deploy directly on the server using Docker:
 
 ```bash
-# Clone the repository on your server
+# Clone the repository on the server
 git clone <repository-url>
 cd brandie_backend
 
-# Create .env file with your configuration
+# Create .env file with configuration
 cp .env.example .env
 nano .env
 

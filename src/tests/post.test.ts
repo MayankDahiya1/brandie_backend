@@ -133,7 +133,7 @@ describe("Post Module", () => {
       .send({
         query: `
           mutation {
-            CreatePost(text: "Hello World!", mediaUrl: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Frarome%2Fbadass-batman-images%2F&psig=AOvVaw0ythQ0rte4iQX-2phtXAXM&ust=1763807126888000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIDEndyDg5EDFQAAAAAdAAAAABAV") {
+            CreatePost(text: "Test post content", mediaUrl: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Frarome%2Fbadass-batman-images%2F&psig=AOvVaw0ythQ0rte4iQX-2phtXAXM&ust=1763807126888000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCIDEndyDg5EDFQAAAAAdAAAAABAV") {
               post { id text author { id email } }
               status
             }
@@ -143,7 +143,7 @@ describe("Post Module", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.data.CreatePost.status).toBe("POST_CREATED_SUCCESSFULLY");
-    expect(res.body.data.CreatePost.post.text).toBe("Hello World!");
+    expect(res.body.data.CreatePost.post.text).toBe("Test post content");
 
     createdPostId = res.body.data.CreatePost.post.id;
   });
